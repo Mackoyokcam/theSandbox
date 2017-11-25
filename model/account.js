@@ -35,6 +35,7 @@ accountSchema.methods.tokenCreate = function() {
 }
 
 accountSchema.methods.update = function(data) {
+  data = {...data}
   let {password} = data
   delete data.password
   return bcrypt.hash(password, 8)
@@ -50,7 +51,7 @@ const Account = module.exports = mongoose.model('account', accountSchema)
 
 // Data is going to contain {username, email, and password}
 Account.create = function(data) {
-  // Hash password
+  data = {...data}
   let {password} = data
   delete data.password
   return bcrypt.hash(password, 8)
