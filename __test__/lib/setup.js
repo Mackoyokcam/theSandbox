@@ -10,7 +10,7 @@ process.env.CLIENT_URL = 'http://localhost:8080'
 process.env.API_URL = 'http://localhost:3000'
 process.env.CORS_ORIGIN = 'http://localhost:8080'
 process.env.SECRET = 'awlfkawlkfmaglksemglskmgslkefmslekgmsgdlkwelkwn'
-process.env.AWS_BUCKET='charity-choice'
+process.env.AWS_BUCKET='mackoy-cloud'
 process.env.AWS_ACCESS_KEY_ID='TEMP'
 process.env.AWS_SECRET_ACCESS_KEY='TEMP'
 

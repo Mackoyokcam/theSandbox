@@ -18,7 +18,7 @@ messageRouter.post('/messages', bearerAuth, (req, res, next) => {
   Profile.findOne({account: req.account._id})
     .then(tempProfile => {
       profile = tempProfile
-      return Message.findOne({account: req.account._id, profile: profile._id, charity: req.body.charity})
+      return Message.findOne({from: profile.id, to: req.body.to})
     })
     .then(message => {
       if(message)
@@ -53,8 +53,8 @@ messageRouter.get('/messages', bearerAuth, (req, res, next) => {
 
   let messagesCache
   Message.find(req.query)
-    .populate('profile')
-    .populate('charity')
+    .populate('from')
+    .populate('to')
     .skip(page * 100)
     .limit(100)
     .then(messages => {
@@ -80,8 +80,8 @@ messageRouter.get('/messages', bearerAuth, (req, res, next) => {
 
 messageRouter.get('/messages/:id', bearerAuth, (req, res, next) => {
   Message.findById(req.params.id)
-    .populate('profile')
-    .populate('charity')
+    .populate('from')
+    .populate('to')
     .then(message => {
       if (!message)
         throw httpErrors(404, '__REQUEST_ERROR__ message not found')
