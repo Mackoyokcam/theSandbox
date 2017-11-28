@@ -30,7 +30,7 @@ accountSchema.methods.tokenCreate = function() {
   return this.save()
     .then(account => {
       let options = {expiresIn: '7d'}
-      return jwt.sign({tokenSeed: account.tokenSeed}, process.env.CLOUD_SECRET, options)
+      return jwt.sign({tokenSeed: account.tokenSeed}, process.env.SECRET, options)
     })
 }
 
@@ -69,7 +69,7 @@ Account.handleGoogleOAuth = function(openIDProfile){
       if (account) {
         if(account.googleOAuth)
           return account
-        throw new Error('account found but not connected to google')
+        throw new Error('Account already exists (non-google-oAuth)')
       }
       // create an account based on the email
       return new Account({
